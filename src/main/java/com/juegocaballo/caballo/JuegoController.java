@@ -9,6 +9,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class JuegoController {
@@ -26,6 +28,10 @@ public class JuegoController {
         for (int i = 0; i < 48; i++) {
             carta = new Carta(i, (i % 12) + 1, (i <= 11) ? "Oros" : (i <= 23) ? "Espadas" : (i <= 35) ? "Bastos" : (i <= 47) ? "Copas" : " " + (i % 4));
             baraja.put(i, carta);
+        }
+        //visualizar baraja
+        for (int i = 0; i < 48; i++) {
+            System.out.println(baraja.get(i).toString());
         }
         barajar();
     }
@@ -47,9 +53,9 @@ public class JuegoController {
         }
 
         //visualizar baraja barajeada
-        for (Map.Entry<Integer, Carta> entry : barajeada.entrySet()) {
+       /* for (Map.Entry<Integer, Carta> entry : barajeada.entrySet()) {
             System.out.println(entry.getKey() + " " + entry.getValue());
-        }
+        }*/
 
         sacarSeisCartas();
 
@@ -63,10 +69,20 @@ public class JuegoController {
                 break;
             }
         }
-
     }
 
-    protected static void actualizarGrid() {
+    protected static Image imprimirSeisCartas(int i) throws FileNotFoundException {
+        FileInputStream imageStream;
+
+        Image image;
+        Carta c = SeisCartas.get(i);
+        imageStream = new FileInputStream("src\\main\\java\\com\\juegocaballo\\caballo\\images\\"+c.getId()+".png");
+        image = new Image(imageStream);
+
+        return image;
+    }
+
+   /* protected static void actualizarGrid() {
         Label text = new Label("Memoriza");
         HBox hb = new HBox(text);
         BorderPane p = new BorderPane();
@@ -81,6 +97,6 @@ public class JuegoController {
             }
         }
         p.setCenter(gp);
-    }
+    }*/
 }
 
