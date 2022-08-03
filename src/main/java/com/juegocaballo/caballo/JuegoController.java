@@ -2,6 +2,11 @@ package com.juegocaballo.caballo;
 
 import com.juegocaballo.caballo.baraja.Carta;
 import javafx.application.Application;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.util.*;
@@ -10,6 +15,7 @@ public class JuegoController {
     private static HashMap<Integer, Carta> baraja = new HashMap<Integer, Carta>();
     private static HashMap<Integer, Carta> barajeada = new LinkedHashMap<Integer, Carta>();//Tiene que ser Linked para que no me las ordene por clave
 
+    private static HashMap<Integer, Carta> SeisCartas = new HashMap<Integer, Carta>();
 
     /**
      * Metodo que crea la baraja de cartas
@@ -39,21 +45,42 @@ public class JuegoController {
                 barajeada.put(numeroAleatorio, carta);
             }
         }
-      /*  // Get all the entries in the map into a list
-        List<Map.Entry<Integer, Carta>> entries = new ArrayList<>(baraja.entrySet());
 
-        // Shuffle the list
-        Collections.shuffle(entries);
-
-        Map<Integer, Carta> barajeada = new LinkedHashMap<>();
-        for (Map.Entry<Integer,Carta> entry : entries) {
-            barajeada.put(entry.getKey(), entry.getValue());
-        }
-*/
         //visualizar baraja barajeada
         for (Map.Entry<Integer, Carta> entry : barajeada.entrySet()) {
-             System.out.println(entry.getKey() + " " + entry.getValue());
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+
+        sacarSeisCartas();
+
+    }
+
+    protected static void sacarSeisCartas() {
+        for (Carta c : barajeada.values()) {
+            if (SeisCartas.size() < 6) {
+                SeisCartas.put(SeisCartas.size(), c);
+            } else {
+                break;
+            }
         }
 
     }
+
+    protected static void actualizarGrid() {
+        Label text = new Label("Memoriza");
+        HBox hb = new HBox(text);
+        BorderPane p = new BorderPane();
+        p.setTop(hb);
+        GridPane gp = new GridPane();
+
+        Png img = new Png();
+
+        for (int i = 0; i < 4; i++) {
+            for (int f = 0; f < 2; f++) {
+                gp.add(img.mazo().get(i), i, f);
+            }
+        }
+        p.setCenter(gp);
+    }
 }
+
