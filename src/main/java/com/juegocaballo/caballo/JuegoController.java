@@ -58,6 +58,7 @@ public class JuegoController {
         }
         return null;
     }
+
     protected static List<Carta> getCaballos() {
         return Caballos;
     }
@@ -83,11 +84,6 @@ public class JuegoController {
         barajeada.remove(34);
         barajeada.remove(46);
 
-        //visualizar baraja barajeada
-       /* for (Map.Entry<Integer, Carta> entry : barajeada.entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue());
-        }*/
-
         sacarSeisCartas();
 
     }
@@ -110,7 +106,7 @@ public class JuegoController {
         for (Carta c : SeisCartas.values()) {
             while (iterator.hasNext()) {
                 Map.Entry<Integer, Carta> entry = iterator.next();
-                if(entry.getValue().equals(c)){
+                if (entry.getValue().equals(c)) {
                     iterator.remove();
                 }
             }
@@ -121,6 +117,7 @@ public class JuegoController {
 
     /**
      * Metodo que devuelve una carta de las seis cartas sacadas
+     *
      * @return HashMap barajeada
      */
     protected static Carta getUnaCartaSeis() {
@@ -150,7 +147,6 @@ public class JuegoController {
         FileInputStream imageStream;
 
         Image image;
-        /* Carta c = SeisCartas.get(i);*/
         imageStream = new FileInputStream("src\\main\\java\\com\\juegocaballo\\caballo\\images\\" + i + ".png");
         image = new Image(imageStream);
 
@@ -162,7 +158,6 @@ public class JuegoController {
         FileInputStream imageStream;
 
         Image image;
-
         imageStream = new FileInputStream("src\\main\\java\\com\\juegocaballo\\caballo\\images\\49.png");
         image = new Image(imageStream);
 
@@ -174,7 +169,6 @@ public class JuegoController {
         FileInputStream imageStream;
 
         Image image;
-
         imageStream = new FileInputStream("src\\main\\java\\com\\juegocaballo\\caballo\\images\\" + i + ".png");
         image = new Image(imageStream);
 
@@ -194,21 +188,5 @@ public class JuegoController {
         return c;
     }
 
-   /* protected static void actualizarGrid() {
-        Label text = new Label("Memoriza");
-        HBox hb = new HBox(text);
-        BorderPane p = new BorderPane();
-        p.setTop(hb);
-        GridPane gp = new GridPane();
-
-        Png img = new Png();
-
-        for (int i = 0; i < 4; i++) {
-            for (int f = 0; f < 2; f++) {
-                gp.add(img.mazo().get(i), i, f);
-            }
-        }
-        p.setCenter(gp);
-    }*/
 }
 

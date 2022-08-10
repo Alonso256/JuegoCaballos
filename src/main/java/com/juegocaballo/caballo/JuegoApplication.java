@@ -82,9 +82,6 @@ public class JuegoApplication {
             board.add(new ImageView(image), i + 1, 6);
         }
 
-
-        //Carta c = JuegoController.sacarCarta();
-        //baraja.add(new ImageView(new Image(new FileInputStream("src\\main\\java\\com\\juegocaballo\\caballo\\images\\" + c.getId() + ".png"))), 0, 0);
         Button b = new Button("Sacar carta");
         baraja.add(b, 0, 1);
 
