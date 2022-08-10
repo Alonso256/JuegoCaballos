@@ -1,13 +1,7 @@
 package com.juegocaballo.caballo;
 
 import com.juegocaballo.caballo.baraja.Carta;
-import javafx.application.Application;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -43,12 +37,22 @@ public class JuegoController {
         return baraja.get(i);
     }
 
+    /**
+     * Actualiza los caballos
+     *
+     * @param c
+     */
     protected static void setCaballos(Carta c) {
         Caballos.removeIf(carta -> carta.getPalo() == c.getPalo());
         Caballos.add(c);
 
     }
 
+    /**
+     * Metodo que saca una carta caballo
+     *
+     * @return Carta
+     */
     protected static Carta getCaballos(int n) {
         for (Carta c : Caballos) {
             if (c.getId() == n) {
@@ -64,7 +68,7 @@ public class JuegoController {
     }
 
     /**
-     * Metodo que mezcla las cartas de manera aleatoria y las añade a el HashMap barajeada
+     * Metodo que mezcla las cartas de manera aleatoria y las añade al HashMap barajeada
      */
     protected static void barajar() {
         for (int i = 0; i < 48; i++) {
@@ -89,7 +93,7 @@ public class JuegoController {
     }
 
     /**
-     * Metodo que saca seis cartas y desoues las elimina de la baraja barajeada
+     * Metodo que saca seis cartas y despues las elimina de la baraja barajeada
      */
     protected static void sacarSeisCartas() {
 
@@ -132,6 +136,11 @@ public class JuegoController {
         return c;
     }
 
+    /**
+     * Metodo que imprime las seis cartas dadas la vuelta
+     *
+     * @return HashMap barajeada
+     */
     protected static Image imprimirSeisCartas() throws FileNotFoundException {
         FileInputStream imageStream;
 
@@ -143,28 +152,13 @@ public class JuegoController {
         return image;
     }
 
-    protected static Image imprimirCaballos(int i) throws FileNotFoundException {
-        FileInputStream imageStream;
-
-        Image image;
-        imageStream = new FileInputStream("src\\main\\java\\com\\juegocaballo\\caballo\\images\\" + i + ".png");
-        image = new Image(imageStream);
-
-
-        return image;
-    }
-
-    protected static Image imprimirBlanco() throws FileNotFoundException {
-        FileInputStream imageStream;
-
-        Image image;
-        imageStream = new FileInputStream("src\\main\\java\\com\\juegocaballo\\caballo\\images\\49.png");
-        image = new Image(imageStream);
-
-
-        return image;
-    }
-
+    /**
+     * Metodo que imprime una carta pasando su id
+     *
+     * @param i
+     * @return Image
+     * @throws FileNotFoundException
+     */
     protected static Image imprimirCarta(int i) throws FileNotFoundException {
         FileInputStream imageStream;
 
@@ -176,6 +170,28 @@ public class JuegoController {
         return image;
     }
 
+    /**
+     * Metodo que imprime una carta en blanco
+     *
+     * @return Image
+     * @throws FileNotFoundException
+     */
+    protected static Image imprimirBlanco() throws FileNotFoundException {
+        FileInputStream imageStream;
+
+        Image image;
+        imageStream = new FileInputStream("src\\main\\java\\com\\juegocaballo\\caballo\\images\\49.png");
+        image = new Image(imageStream);
+
+
+        return image;
+    }
+
+    /**
+     * Metodo Saca una carta de la baraja
+     *
+     * @return Carta
+     */
     protected static Carta sacarCarta() {
         Carta c = null;
         int k = 0;

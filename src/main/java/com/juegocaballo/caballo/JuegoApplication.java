@@ -2,7 +2,6 @@ package com.juegocaballo.caballo;
 
 
 import com.juegocaballo.caballo.baraja.Carta;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -54,9 +53,14 @@ public class JuegoApplication {
         actualizarGrid(board, Baraja);
     }
 
+    /**
+     * Metodo que empieza el juego
+     *
+     * @param board
+     * @param baraja
+     * @throws FileNotFoundException
+     */
     protected static void actualizarGrid(GridPane board, GridPane baraja) throws FileNotFoundException {
-
-        FileInputStream imageStream;
 
         Image image;
 
@@ -78,7 +82,7 @@ public class JuegoApplication {
             c.setX(i + 1);
             c.setY(6);
             JuegoController.setCaballos(c);
-            image = JuegoController.imprimirCaballos(c.getId());
+            image = JuegoController.imprimirCarta(c.getId());
             board.add(new ImageView(image), i + 1, 6);
         }
 
@@ -95,6 +99,12 @@ public class JuegoApplication {
 
     }
 
+    /**
+     * Metodo que añade las imagenes de las cartas
+     *
+     * @param baraja
+     * @throws IOException
+     */
     private static void empezarJuego(GridPane baraja) throws IOException {
         try {
             Carta c = JuegoController.sacarCarta();
@@ -110,6 +120,12 @@ public class JuegoApplication {
         }
     }
 
+    /**
+     * Comprueba que tipo de carta es y realiza la accion correspondiente
+     *
+     * @param c
+     * @throws FileNotFoundException
+     */
     private static void comprobarCarta(Carta c) throws FileNotFoundException {
         try {
             if (c.getId() <= 11) {
@@ -117,12 +133,13 @@ public class JuegoApplication {
                 Carta caballo = JuegoController.getCaballos(10);
 
                 board.add(new ImageView(JuegoController.imprimirBlanco()), caballo.getX(), caballo.getY());
+
                 if (caballo.getY() == 0) {
                     throw new Exception("Oros ha ganado");
                 }
                 caballo.setY(caballo.getY() - 1);
 
-                board.add(new ImageView(JuegoController.imprimirCaballos(10)), caballo.getX(), caballo.getY());
+                board.add(new ImageView(JuegoController.imprimirCarta(10)), caballo.getX(), caballo.getY());
 
                 JuegoController.setCaballos(caballo);
 
@@ -130,36 +147,39 @@ public class JuegoApplication {
                 Carta caballo = JuegoController.getCaballos(22);
 
                 board.add(new ImageView(JuegoController.imprimirBlanco()), caballo.getX(), caballo.getY());
+
                 if (caballo.getY() == 0) {
                     throw new Exception("Espadas ha ganado");
                 }
                 caballo.setY(caballo.getY() - 1);
 
-                board.add(new ImageView(JuegoController.imprimirCaballos(22)), caballo.getX(), caballo.getY());
+                board.add(new ImageView(JuegoController.imprimirCarta(22)), caballo.getX(), caballo.getY());
 
                 JuegoController.setCaballos(caballo);
             } else if (c.getId() <= 35) {
                 Carta caballo = JuegoController.getCaballos(34);
 
                 board.add(new ImageView(JuegoController.imprimirBlanco()), caballo.getX(), caballo.getY());
+
                 if (caballo.getY() == 0) {
                     throw new Exception("Bastos ha ganado");
                 }
                 caballo.setY(caballo.getY() - 1);
 
-                board.add(new ImageView(JuegoController.imprimirCaballos(34)), caballo.getX(), caballo.getY());
+                board.add(new ImageView(JuegoController.imprimirCarta(34)), caballo.getX(), caballo.getY());
 
                 JuegoController.setCaballos(caballo);
             } else if (c.getId() <= 47) {
                 Carta caballo = JuegoController.getCaballos(46);
 
                 board.add(new ImageView(JuegoController.imprimirBlanco()), caballo.getX(), caballo.getY());
+
                 if (caballo.getY() == 0) {
                     throw new Exception("Copas ha ganado");
                 }
                 caballo.setY(caballo.getY() - 1);
 
-                board.add(new ImageView(JuegoController.imprimirCaballos(46)), caballo.getX(), caballo.getY());
+                board.add(new ImageView(JuegoController.imprimirCarta(46)), caballo.getX(), caballo.getY());
 
                 JuegoController.setCaballos(caballo);
             }
@@ -167,6 +187,7 @@ public class JuegoApplication {
             if (comprobarFila()) {
                 int id = JuegoController.getUnaCartaSeis().getId();
                 board.add(new ImageView(JuegoController.imprimirCarta(id)), 0, fila + 1);
+
                 if (id <= 11) {
                     Carta caballo = JuegoController.getCaballos(10);
 
@@ -174,32 +195,38 @@ public class JuegoApplication {
 
                     caballo.setY(caballo.getY() + 1);
 
-                    board.add(new ImageView(JuegoController.imprimirCaballos(10)), caballo.getX(), caballo.getY());
+                    board.add(new ImageView(JuegoController.imprimirCarta(10)), caballo.getX(), caballo.getY());
 
                     JuegoController.setCaballos(caballo);
                 } else if (id <= 23) {
                     Carta caballo = JuegoController.getCaballos(22);
+
                     board.add(new ImageView(JuegoController.imprimirBlanco()), caballo.getX(), caballo.getY());
 
                     caballo.setY(caballo.getY() + 1);
 
-                    board.add(new ImageView(JuegoController.imprimirCaballos(22)), caballo.getX(), caballo.getY());
+                    board.add(new ImageView(JuegoController.imprimirCarta(22)), caballo.getX(), caballo.getY());
+
                     JuegoController.setCaballos(caballo);
                 } else if (id <= 35) {
                     Carta caballo = JuegoController.getCaballos(34);
+
                     board.add(new ImageView(JuegoController.imprimirBlanco()), caballo.getX(), caballo.getY());
 
                     caballo.setY(caballo.getY() + 1);
 
-                    board.add(new ImageView(JuegoController.imprimirCaballos(34)), caballo.getX(), caballo.getY());
+                    board.add(new ImageView(JuegoController.imprimirCarta(34)), caballo.getX(), caballo.getY());
+
                     JuegoController.setCaballos(caballo);
                 } else if (id <= 47) {
                     Carta caballo = JuegoController.getCaballos(46);
+
                     board.add(new ImageView(JuegoController.imprimirBlanco()), caballo.getX(), caballo.getY());
 
                     caballo.setY(caballo.getY() + 1);
 
-                    board.add(new ImageView(JuegoController.imprimirCaballos(46)), caballo.getX(), caballo.getY());
+                    board.add(new ImageView(JuegoController.imprimirCarta(46)), caballo.getX(), caballo.getY());
+
                     JuegoController.setCaballos(caballo);
                 }
 
@@ -236,37 +263,5 @@ public class JuegoApplication {
         }
         return false;
     }
-
-   /* private static List getNode(Integer n) {
-
-        Carta c = JuegoController.getCaballos(n);
-        int row = c.getX();
-        int col = c.getY();
-
-
-        List<Node> matchingNodes = new ArrayList<>();
-
-
-        for (Node node : board.getChildren()) {
-            if (GridPane.getColumnIndex(node) == row && GridPane.getColumnIndex(node) == col) {
-                matchingNodes.add(node);
-            }
-        }
-
-
-        return matchingNodes;
-
-    }*/
-
-    private Stage actualizar() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("juego-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 603, 634);
-        Stage stage = new Stage();
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
-        return stage;
-    }
-
 
 }
