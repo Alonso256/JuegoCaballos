@@ -19,6 +19,9 @@ public class JuegoController {
 
     private static HashMap<Integer, Carta> SeisCartas = new HashMap<Integer, Carta>();
 
+    private static List<Carta> Caballos = new ArrayList<>();
+
+
     /**
      * Metodo que crea la baraja de cartas
      */
@@ -36,6 +39,28 @@ public class JuegoController {
         barajar();
     }
 
+    protected static Carta getBaraja(int i) {
+        return baraja.get(i);
+    }
+
+    protected static void setCaballos(Carta c) {
+        Caballos.removeIf(carta -> carta.getPalo() == c.getPalo());
+        Caballos.add(c);
+
+    }
+
+    protected static Carta getCaballos(int n) {
+        for (Carta c : Caballos) {
+            if (c.getId() == n) {
+                return c;
+            }
+
+        }
+        return null;
+    }
+    protected static List<Carta> getCaballos() {
+        return Caballos;
+    }
 
     /**
      * Metodo que mezcla las cartas de manera aleatoria y las añade a el HashMap barajeada
@@ -52,6 +77,12 @@ public class JuegoController {
             }
         }
 
+        //Quitar cabballos
+        barajeada.remove(10);
+        barajeada.remove(22);
+        barajeada.remove(34);
+        barajeada.remove(46);
+
         //visualizar baraja barajeada
        /* for (Map.Entry<Integer, Carta> entry : barajeada.entrySet()) {
             System.out.println(entry.getKey() + " " + entry.getValue());
@@ -61,25 +92,106 @@ public class JuegoController {
 
     }
 
+    /**
+     * Metodo que saca seis cartas y desoues las elimina de la baraja barajeada
+     */
     protected static void sacarSeisCartas() {
+
         for (Carta c : barajeada.values()) {
             if (SeisCartas.size() < 6) {
                 SeisCartas.put(SeisCartas.size(), c);
+
             } else {
                 break;
             }
         }
+
+        Iterator<Map.Entry<Integer, Carta>> iterator = barajeada.entrySet().iterator();
+        for (Carta c : SeisCartas.values()) {
+            while (iterator.hasNext()) {
+                Map.Entry<Integer, Carta> entry = iterator.next();
+                if(entry.getValue().equals(c)){
+                    iterator.remove();
+                }
+            }
+        }
+
+
     }
 
-    protected static Image imprimirSeisCartas(int i) throws FileNotFoundException {
+    /**
+     * Metodo que devuelve una carta de las seis cartas sacadas
+     * @return HashMap barajeada
+     */
+    protected static Carta getUnaCartaSeis() {
+        Carta c = null;
+        int k = 0;
+        for (Integer Key : SeisCartas.keySet()) {
+            c = SeisCartas.get(Key);
+            k = Key;
+            break;
+        }
+        SeisCartas.remove(k);
+        return c;
+    }
+
+    protected static Image imprimirSeisCartas() throws FileNotFoundException {
         FileInputStream imageStream;
 
         Image image;
-        Carta c = SeisCartas.get(i);
-        imageStream = new FileInputStream("src\\main\\java\\com\\juegocaballo\\caballo\\images\\"+c.getId()+".png");
+        /* Carta c = SeisCartas.get(i);*/
+        imageStream = new FileInputStream("src\\main\\java\\com\\juegocaballo\\caballo\\images\\48.png");
         image = new Image(imageStream);
 
         return image;
+    }
+
+    protected static Image imprimirCaballos(int i) throws FileNotFoundException {
+        FileInputStream imageStream;
+
+        Image image;
+        /* Carta c = SeisCartas.get(i);*/
+        imageStream = new FileInputStream("src\\main\\java\\com\\juegocaballo\\caballo\\images\\" + i + ".png");
+        image = new Image(imageStream);
+
+
+        return image;
+    }
+
+    protected static Image imprimirBlanco() throws FileNotFoundException {
+        FileInputStream imageStream;
+
+        Image image;
+
+        imageStream = new FileInputStream("src\\main\\java\\com\\juegocaballo\\caballo\\images\\49.png");
+        image = new Image(imageStream);
+
+
+        return image;
+    }
+
+    protected static Image imprimirCarta(int i) throws FileNotFoundException {
+        FileInputStream imageStream;
+
+        Image image;
+
+        imageStream = new FileInputStream("src\\main\\java\\com\\juegocaballo\\caballo\\images\\" + i + ".png");
+        image = new Image(imageStream);
+
+
+        return image;
+    }
+
+    protected static Carta sacarCarta() {
+        Carta c = null;
+        int k = 0;
+        for (Integer Key : barajeada.keySet()) {
+            c = barajeada.get(Key);
+            k = Key;
+            break;
+        }
+        barajeada.remove(k);
+        return c;
     }
 
    /* protected static void actualizarGrid() {
