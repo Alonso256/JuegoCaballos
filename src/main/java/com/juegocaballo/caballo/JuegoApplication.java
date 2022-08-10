@@ -22,13 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JuegoApplication {
-    private int id;
     static GridPane board = new GridPane();
     private static int fila = 5;
- private static Stage stage;
+    private static Stage stage;
 
-    protected void start(int id) throws IOException {
-        this.id = id;
+    protected void start() throws IOException {
         JuegoController.inicializarBaraja();
 
         HBox hBox = new HBox();
@@ -48,20 +46,10 @@ public class JuegoApplication {
 
 
         Scene display = new Scene(hBox);
-         stage = new Stage();
+        stage = new Stage();
         stage.setTitle("Hello!");
         stage.setScene(display);
         stage.show();
-
-
-     /*   Png img = new Png();
-        Image image = new Image("File:com/juegocaballo/caballo/png1.png");
-        ImageView imageView = new ImageView();
-        imageView.setFitWidth(130);
-        imageView.setFitHeight(130);
-        imageView.setImage(image);
-        board.add(imageView, 2, 2);*/
-
 
         actualizarGrid(board, Baraja);
     }
@@ -112,10 +100,10 @@ public class JuegoApplication {
 
     private static void empezarJuego(GridPane baraja) throws IOException {
         try {
-        Carta c = JuegoController.sacarCarta();
-        baraja.add(new ImageView(new Image(new FileInputStream("src\\main\\java\\com\\juegocaballo\\caballo\\images\\" + c.getId() + ".png"))), 0, 0);
+            Carta c = JuegoController.sacarCarta();
+            baraja.add(new ImageView(new Image(new FileInputStream("src\\main\\java\\com\\juegocaballo\\caballo\\images\\" + c.getId() + ".png"))), 0, 0);
 
-        comprobarCarta(c);
+            comprobarCarta(c);
         } catch (java.lang.NullPointerException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Fin del juego");
@@ -225,7 +213,7 @@ public class JuegoApplication {
             alert.setHeaderText(e.getMessage());
             alert.showAndWait();
 
-            HelloController.cerrarVentana( new HelloApplication().getStage());
+            HelloController.cerrarVentana(new HelloApplication().getStage());
             stage.close();
 
         }

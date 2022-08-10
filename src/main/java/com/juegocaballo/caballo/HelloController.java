@@ -12,22 +12,22 @@ public class HelloController {
     @FXML
     protected void onOrosClick() throws IOException {
         esconderVentana(new HelloApplication().getStage());
-        new JuegoApplication().start(1);
+        new JuegoApplication().start();
     }
     @FXML
     protected void onBastosClick() throws IOException {
         esconderVentana(new HelloApplication().getStage());
-        new JuegoApplication().start(2);
+        new JuegoApplication().start();
     }
     @FXML
     protected void onEspadasClick() throws IOException {
         esconderVentana(new HelloApplication().getStage());
-        new JuegoApplication().start(3);
+        new JuegoApplication().start();
     }
     @FXML
     protected void onCopasClick() throws IOException {
         esconderVentana(new HelloApplication().getStage());
-        new JuegoApplication().start(4);
+        new JuegoApplication().start();
     }
 
     protected void esconderVentana(Stage w){
