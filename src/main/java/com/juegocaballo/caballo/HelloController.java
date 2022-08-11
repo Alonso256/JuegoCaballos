@@ -10,25 +10,25 @@ public class HelloController {
     @FXML
     protected void onOrosClick() throws IOException {
         esconderVentana(new HelloApplication().getStage());
-        new JuegoApplication().start();
+        new JuegoApplication().start(1);
     }
 
     @FXML
     protected void onBastosClick() throws IOException {
         esconderVentana(new HelloApplication().getStage());
-        new JuegoApplication().start();
+        new JuegoApplication().start(2);
     }
 
     @FXML
     protected void onEspadasClick() throws IOException {
         esconderVentana(new HelloApplication().getStage());
-        new JuegoApplication().start();
+        new JuegoApplication().start(3);
     }
 
     @FXML
     protected void onCopasClick() throws IOException {
         esconderVentana(new HelloApplication().getStage());
-        new JuegoApplication().start();
+        new JuegoApplication().start(4);
     }
 
     protected void esconderVentana(Stage w) {

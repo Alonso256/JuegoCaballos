@@ -25,8 +25,10 @@ public class JuegoApplication {
     static GridPane board = new GridPane();
     private static int fila = 5;
     private static Stage stage;
+    private static int jugador;
 
-    protected void start() throws IOException {
+    protected void start(int num) throws IOException {
+        jugador = num;
         JuegoController.inicializarBaraja();
 
         HBox hBox = new HBox();
@@ -142,7 +144,10 @@ public class JuegoApplication {
                 board.add(new ImageView(JuegoController.imprimirBlanco()), caballo.getX(), caballo.getY());
 
                 if (caballo.getY() == 0) {
-                    throw new Exception("Oros ha ganado");
+                    if(jugador == 1)
+                        throw new Exception("Oros ha ganado, HAS GANADO");
+                    else
+                        throw new Exception("Oros ha ganado, HAS PERDIDO");
                 }
                 caballo.setY(caballo.getY() - 1);
 
@@ -156,7 +161,11 @@ public class JuegoApplication {
                 board.add(new ImageView(JuegoController.imprimirBlanco()), caballo.getX(), caballo.getY());
 
                 if (caballo.getY() == 0) {
-                    throw new Exception("Espadas ha ganado");
+                    if(jugador == 3)
+                        throw new Exception("Espadas ha ganado, HAS GANADO");
+                    else
+                        throw new Exception("Espadas ha ganado, HAS PERDIDO");
+
                 }
                 caballo.setY(caballo.getY() - 1);
 
@@ -169,7 +178,11 @@ public class JuegoApplication {
                 board.add(new ImageView(JuegoController.imprimirBlanco()), caballo.getX(), caballo.getY());
 
                 if (caballo.getY() == 0) {
-                    throw new Exception("Bastos ha ganado");
+                    if(jugador == 2)
+                        throw new Exception("Bastos ha ganado, HAS GANADO");
+                    else
+                        throw new Exception("Bastos ha ganado, HAS PERDIDO");
+
                 }
                 caballo.setY(caballo.getY() - 1);
 
@@ -182,7 +195,11 @@ public class JuegoApplication {
                 board.add(new ImageView(JuegoController.imprimirBlanco()), caballo.getX(), caballo.getY());
 
                 if (caballo.getY() == 0) {
-                    throw new Exception("Copas ha ganado");
+                    if(jugador == 4)
+                        throw new Exception("Copas ha ganado, HAS GANADO");
+                    else
+                        throw new Exception("Copas ha ganado, HAS PERDIDO");
+
                 }
                 caballo.setY(caballo.getY() - 1);
 
