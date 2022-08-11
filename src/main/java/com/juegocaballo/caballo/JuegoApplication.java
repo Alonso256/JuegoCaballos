@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class JuegoApplication {
     static GridPane board = new GridPane();
     private static int fila = 5;
@@ -37,7 +38,7 @@ public class JuegoApplication {
 
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 7; j++)
-                board.add(new Rectangle(50, 50, Color.BEIGE), i, j);
+                board.add(new Rectangle(70, 100, Color.BEIGE), i, j);
 
         board.setGridLinesVisible(true);
 
@@ -48,6 +49,9 @@ public class JuegoApplication {
         stage = new Stage();
         stage.setTitle("Hello!");
         stage.setScene(display);
+
+        stage.setHeight(840);
+        stage.setWidth(500);
         stage.show();
 
         actualizarGrid(board, Baraja);
@@ -111,12 +115,15 @@ public class JuegoApplication {
             baraja.add(new ImageView(new Image(new FileInputStream("src\\main\\java\\com\\juegocaballo\\caballo\\images\\" + c.getId() + ".png"))), 0, 0);
 
             comprobarCarta(c);
+
         } catch (java.lang.NullPointerException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Fin del juego");
             alert.setHeaderText("No hay cartas");
             alert.setContentText("No hay cartas para sacar");
             alert.showAndWait();
+
+
         }
     }
 
@@ -124,9 +131,9 @@ public class JuegoApplication {
      * Comprueba que tipo de carta es y realiza la accion correspondiente
      *
      * @param c
-     * @throws FileNotFoundException
      */
-    private static void comprobarCarta(Carta c) throws FileNotFoundException {
+    private static void comprobarCarta(Carta c) {
+
         try {
             if (c.getId() <= 11) {
 
@@ -244,15 +251,14 @@ public class JuegoApplication {
     }
 
     /**
-     * Comprueba si en la fila estan todos los caballos para desvelar la carta
+     * Comprueba si en la fila están todos los caballos para desvelar la carta
      *
-     * @return
+     * @return true si están todos los caballos en la misma fila
      */
     private static boolean comprobarFila() {
         List<Carta> cartas = JuegoController.getCaballos();
         int contador = 0;
-        for (int i = 0; i < cartas.size(); i++) {
-            Carta caballo = cartas.get(i);
+        for (Carta caballo : cartas) {
             if (caballo.getY() <= fila) {
                 contador++;
             }

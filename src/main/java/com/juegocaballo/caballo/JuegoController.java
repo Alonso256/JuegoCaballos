@@ -8,12 +8,12 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class JuegoController {
-    private static HashMap<Integer, Carta> baraja = new HashMap<Integer, Carta>();
-    private static HashMap<Integer, Carta> barajeada = new LinkedHashMap<Integer, Carta>();//Tiene que ser Linked para que no me las ordene por clave
+    private static final HashMap<Integer, Carta> baraja = new HashMap<>();
+    private static final HashMap<Integer, Carta> barajeada = new LinkedHashMap<>();//Tiene que ser Linked para que no me las ordene por clave
 
-    private static HashMap<Integer, Carta> SeisCartas = new HashMap<Integer, Carta>();
+    private static final HashMap<Integer, Carta> SeisCartas = new HashMap<>();
 
-    private static List<Carta> Caballos = new ArrayList<>();
+    private static final List<Carta> Caballos = new ArrayList<>();
 
 
     /**
@@ -23,13 +23,10 @@ public class JuegoController {
         Carta carta;
 
         for (int i = 0; i < 48; i++) {
-            carta = new Carta(i, (i % 12) + 1, (i <= 11) ? "Oros" : (i <= 23) ? "Espadas" : (i <= 35) ? "Bastos" : (i <= 47) ? "Copas" : " " + (i % 4));
+            carta = new Carta(i, (i % 12) + 1, i <= 11 ? "Oros" : i <= 23 ? "Espadas" : i <= 35 ? "Bastos" : "Copas");
             baraja.put(i, carta);
         }
-        //visualizar baraja
-        for (int i = 0; i < 48; i++) {
-            System.out.println(baraja.get(i).toString());
-        }
+
         barajar();
     }
 
@@ -43,7 +40,7 @@ public class JuegoController {
      * @param c
      */
     protected static void setCaballos(Carta c) {
-        Caballos.removeIf(carta -> carta.getPalo() == c.getPalo());
+        Caballos.removeIf(carta -> carta.getPalo().equals(c.getPalo()));
         Caballos.add(c);
 
     }
@@ -75,7 +72,6 @@ public class JuegoController {
             int numeroAleatorio = (int) (Math.random() * 48 + 0);
             if (barajeada.containsKey(numeroAleatorio)) {
                 i--;
-                continue;
             } else {
                 Carta carta = baraja.get(numeroAleatorio);
                 barajeada.put(numeroAleatorio, carta);
@@ -93,7 +89,7 @@ public class JuegoController {
     }
 
     /**
-     * Metodo que saca seis cartas y despues las elimina de la baraja barajeada
+     * Metodo que saca seis cartas y después las elimina de la baraja barajeada
      */
     protected static void sacarSeisCartas() {
 
